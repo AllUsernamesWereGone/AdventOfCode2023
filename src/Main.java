@@ -16,7 +16,9 @@ public class Main {
         dFive.start("inputDay5test");
 */
         //dSix.start("inputDay6");
-        dSeven.start("inputDay7");
+        //dSeven.start("inputDay7");
+        System.out.println("Kein Ergebnis Day 7, weiter Day 8:");
+        dEight.start("inputDay8");
 
 
 

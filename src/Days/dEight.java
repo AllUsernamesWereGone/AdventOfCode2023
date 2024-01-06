@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class dEight {
     private static final ArrayList<String> fileNames = new ArrayList<>();
+    private static char[] rightLeftArray;
 
     public static void start(String name) {
         fileReader(name);
@@ -34,11 +36,31 @@ public class dEight {
 
     }
 
-    private static int getSolution(){
+    private static int getSolution() {
+
+        generateSeparateLists();
+
+
+        System.out.println("test");
 
         return -1;
     }
 
+    private static void generateSeparateLists() {
+        generateRightLeftArray();
+
+        for (int i = 2; i < fileNames.size(); i++) {//start at index 2
+            fileNames.get(i).toCharArray();
+            fileNames.contains("AAA");
+        }
+
+
+    }
+
+    private static void generateRightLeftArray() {
+        rightLeftArray = new char[(fileNames.get(0)).length()];
+        rightLeftArray = (fileNames.get(0)).toCharArray();
+    }
 
 
 }
