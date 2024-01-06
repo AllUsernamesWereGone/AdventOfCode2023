@@ -10,6 +10,12 @@ import java.util.Arrays;
 public class dEight {
     private static final ArrayList<String> fileNames = new ArrayList<>();
     private static char[] rightLeftArray;
+    private static final ArrayList<String> leftList = new ArrayList<>();
+    private static final ArrayList<String> rightList = new ArrayList<>();
+    private static final ArrayList<String> startList = new ArrayList<>();
+    private static final int[] indexArrayStart = new int[6];
+    private static final int[] indexArrayEnd = new int[6];
+    private static int result;
 
     public static void start(String name) {
         fileReader(name);
@@ -37,23 +43,81 @@ public class dEight {
     }
 
     private static int getSolution() {
-
+        int counter = 0;
+        int k = 0;
         generateSeparateLists();
+        getArrayIndex("A",indexArrayStart);
+        getArrayIndex("Z",indexArrayEnd);
+
+        while(true){
 
 
-        System.out.println("test");
 
-        return -1;
+
+        }
+
+// muss simultan laufen
+        // jeden a wert durchgehen und dann vergleichen ob alle an einem endwert sind
+
+
+
+//------------------------------------------------------------
+        for (int i = 0; i < 6; i++) {
+
+            int index = indexArrayStart[i];
+
+            while (check(index)) {
+                if (rightLeftArray[k] == 'L') {
+                    index = startList.indexOf(leftList.get(index));
+                } else {
+                    index = startList.indexOf(rightList.get(index));
+                }
+                counter++;
+                k = counter % rightLeftArray.length;
+            }
+            if(result < counter){
+                result = counter;
+            }
+            counter = 0;
+            k = 0;
+        }
+        return result;
+    }
+
+    private static boolean check(int index) {
+        for (int j : indexArrayEnd) {
+            if (index == j) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static void getArrayIndex(String letter, int [] indexArray) {
+        int j = 0;
+        for (int i = 0; i < startList.size(); i++) {
+            if(startList.get(i).equals(letter)){
+                indexArray[j] = i;
+                j++;
+            }
+        }
     }
 
     private static void generateSeparateLists() {
         generateRightLeftArray();
 
+        String line;
         for (int i = 2; i < fileNames.size(); i++) {//start at index 2
-            fileNames.get(i).toCharArray();
-            fileNames.contains("AAA");
+            line = fileNames.get(i);
+            generateThreeLists(line, i - 2);
         }
+    }
 
+    private static void generateThreeLists(String line, int i) {
+
+        startList.add("" +  line.charAt(2));
+        leftList.add("" +  line.charAt(9));
+        rightList.add("" + line.charAt(14));
 
     }
 
