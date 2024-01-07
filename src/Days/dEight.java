@@ -15,6 +15,7 @@ public class dEight {
     private static final ArrayList<String> startList = new ArrayList<>();
     private static final int[] indexArrayStart = new int[6];
     private static final int[] indexArrayEnd = new int[6];
+    private static int[] counterArray = new int[6];
     private static int result;
 
     public static void start(String name) {
@@ -42,24 +43,57 @@ public class dEight {
 
     }
 
-    private static int getSolution() {
+    private static String getSolution() {
         int counter = 0;
         int k = 0;
         generateSeparateLists();
-        getArrayIndex("A",indexArrayStart);
-        getArrayIndex("Z",indexArrayEnd);
+        getArrayIndex("A", indexArrayStart);
+        getArrayIndex("Z", indexArrayEnd);
+        startList.clear();
+        leftList.clear();
+        rightList.clear();
+        generateSeparateListsThree();
 
-        while(true){
 
+        for (int i = 0; i < 6; i++) {
 
+            int index = indexArrayStart[i];
 
-
+            while (check(index)) {
+                if (rightLeftArray[k] == 'L') {
+                    index = startList.indexOf(leftList.get(index));
+                } else {
+                    index = startList.indexOf(rightList.get(index));
+                }
+                counter++;
+                k = counter % rightLeftArray.length;
+            }
+            counterArray[i] = counter;
+            counter = 0;
+            k = 0;
         }
+        //Davon manuell kleinstes gemeinsames vielfaches berechnen
+        return Arrays.toString(counterArray);
 
-// muss simultan laufen
-        // jeden a wert durchgehen und dann vergleichen ob alle an einem endwert sind
 
 
+
+
+        /*
+        while(check()){
+            for (int i = 0; i < indexArrayStart.length; i++) {
+                if (rightLeftArray[k] == 'L') {
+                    indexArrayStart[i] = startList.indexOf(leftList.get(indexArrayStart[i]));
+                } else {
+                    indexArrayStart[i] = startList.indexOf(rightList.get(indexArrayStart[i]));
+                }
+                System.out.print(startList.get(indexArrayStart[i]));
+                System.out.println(startList.get(indexArrayEnd[i]));
+            }
+            k = counter % rightLeftArray.length;
+            counter++;
+        }
+        return Arrays.toString(counterArray);
 
 //------------------------------------------------------------
         for (int i = 0; i < 6; i++) {
@@ -81,22 +115,37 @@ public class dEight {
             counter = 0;
             k = 0;
         }
-        return result;
+        return result;*/
     }
 
-    private static boolean check(int index) {
-        for (int j : indexArrayEnd) {
-            if (index == j) {
-                return false;
-            }
+    private static void generateSeparateListsThree() {
+        String line;
+        for (int i = 2; i < fileNames.size(); i++) {//start at index 2
+            line = fileNames.get(i);
+            generateThreeListsThree(line, i - 2);
+        }
+    }
+
+    private static void generateThreeListsThree(String line, int i) {
+
+        startList.add("" + line.charAt(0) + line.charAt(1) + line.charAt(2));
+        leftList.add("" + line.charAt(7) + line.charAt(8) + line.charAt(9));
+        rightList.add("" + line.charAt(12) + line.charAt(13) + line.charAt(14));
+    }
+
+    private static boolean check(int j) {
+
+        if (j == indexArrayEnd[0] || j == indexArrayEnd[1] || j == indexArrayEnd[2] ||
+                j == indexArrayEnd[3] || j == indexArrayEnd[4] || j == indexArrayEnd[5]) {
+            return false;
         }
         return true;
     }
 
-    private static void getArrayIndex(String letter, int [] indexArray) {
+    private static void getArrayIndex(String letter, int[] indexArray) {
         int j = 0;
         for (int i = 0; i < startList.size(); i++) {
-            if(startList.get(i).equals(letter)){
+            if (startList.get(i).equals(letter)) {
                 indexArray[j] = i;
                 j++;
             }
@@ -115,8 +164,8 @@ public class dEight {
 
     private static void generateThreeLists(String line, int i) {
 
-        startList.add("" +  line.charAt(2));
-        leftList.add("" +  line.charAt(9));
+        startList.add("" + line.charAt(2));
+        leftList.add("" + line.charAt(9));
         rightList.add("" + line.charAt(14));
 
     }
