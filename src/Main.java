@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    static String current = "inputDayx";
+    static String current = "inputDay10";
 
 
     public static void main(String[] args) {
