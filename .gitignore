@@ -28,5 +28,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
 /src/Files/outputtest.txt
 /src/Files/inputDayx.txt
+/src/Days/PipeMaze.java
