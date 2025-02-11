@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
 
-    static String current = "inputDayx";
+    static String current = "inputDay11";
 
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class Main {
         char[][] charArrayInput = to2DcharArray(ArrayListInput);
 
 
-        System.out.println("Solution: " + Days.dayEleven.start(ArrayListInput, charArrayInput));
+        System.out.println("Solution: " + Days.dayTwelve.start(ArrayListInput, charArrayInput));
 
         getTime(time1);
 
